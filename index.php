@@ -65,7 +65,7 @@ $data = json_decode($jsondata, true);
                 $element["name"]["english"] === "Ivysaur" ||
                 $element["name"]["english"] === "Charmeleon" ||
                 $element["name"]["english"] === "Wartortle" ||
-                $element["name"]["english"] === "	Metapod"
+                $element["name"]["english"] === "Metapod"
               ) : ?>
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
