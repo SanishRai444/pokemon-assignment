@@ -1,3 +1,12 @@
+<?php
+
+use function PHPSTORM_META\elementType;
+
+$jsondata = file_get_contents("./data.json");
+$data = json_decode($jsondata, true);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,21 +15,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokemon!</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
 </head>
 
 <body class="bg-dark">
   <div class="container">
     <div class="mt-4 mb-5 d-flex justify-content-between align-items-center">
-      <h1 class="text-white">Get your Pokemon!</h1>
+      <h1 class="text-white"><i class=" fa-solid fa-person-running"></i> Get your Pokemon!</h1>
       <div>
         <button class="btn btn-primary">
           <i class="fa fa-sign-in"></i> Login</button>
       </div>
     </div>
-    <table class="table table-dark">
+    <table class="table table-dark table-striped">
       <thead>
         <tr>
           <th scope="col">Image</th>
@@ -29,19 +37,64 @@
           <th scope="col">Description</th>
           <th scope="col">Weight</th>
           <th scope="col">Height</th>
+          <th scope="col">Evolution</th>
           <th scope="col">Action</th>
+
         </tr>
       </thead>
       <tbody>
+        <?php foreach ($data as $element) :  ?>
+          <tr>
+            <td><img src="<?php echo $element["image"]["thumbnail"] ?>" /></td>
+            <td><?= $element["name"]["english"] ?></td>
+            <td><?= strtoupper($element["species"]) ?></td>
+            <td><?= $element["description"] ?></td>
+            <td><?= $element["profile"]["weight"] ?></td>
+            <td><?= $element["profile"]["height"] ?></td>
+            <td>
+              <?php if (
+                $element["name"]["english"] === "Bulbasaur" ||
+                $element["name"]["english"] === "Charmander" ||
+                $element["name"]["english"] === "Squirtle" ||
+                $element["name"]["english"] === "Caterpie"
+              ) : ?>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+              <?php elseif (
+                $element["name"]["english"] === "Ivysaur" ||
+                $element["name"]["english"] === "Charmeleon" ||
+                $element["name"]["english"] === "Wartortle" ||
+                $element["name"]["english"] === "	Metapod"
+              ) : ?>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+              <?php elseif (
+                $element["name"]["english"] === "Venusaur" ||
+                $element["name"]["english"] === "Charizard" ||
+                $element["name"]["english"] === "Blastoise" ||
+                $element["name"]["english"] === "Butterfree"
+              ) : ?>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
 
-        <!-- Write your code here -->
+              <?php endif; ?>
+
+            </td>
+            <td><button class="btn btn-warning"><i class="fa-solid fa-plus"></i> Collect</button></td>
+          </tr>
+        <?php endforeach; ?>
+
+
       </tbody>
+
     </table>
 
   </div>
   <!-- DNT MAKE ANY CHANGES ON THE CODE BELOW -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+  <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
   </script>
 </body>
 
